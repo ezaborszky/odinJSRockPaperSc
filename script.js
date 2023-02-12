@@ -16,12 +16,20 @@ function playRound (){
     let computerSelection = getComputerChoice().toLowerCase();
    
    
-    let playerSelection = (prompt("Enter your choice!", "")).toLowerCase();
-    if (playerSelection !== "rock" && playerSelection !== "paper" && playerSelection !== "scissor") {
-        alert("Please enter Rock, Paper or Scissor!")
-        location. reload() 
-    } else {
-    if (playerSelection === computerSelection) {
+    function checkInput() {while (true) {let playerSelection = (prompt("Enter your choice!", "")).toLowerCase();
+    if (playerSelection === "rock" || playerSelection === "paper" || playerSelection === "scissor") {
+        return playerSelection;
+        break;
+        
+        } else{
+            alert("Please enter \"Rock\", \"Paper\", or \"Scissor\"");
+        }
+       
+    }}
+
+    playerSelection = checkInput();
+    
+        if (playerSelection === computerSelection) {
         alert(`Computer chose ${computerSelection}, player choose ${playerSelection}, it's a draw!`);
         return 0;
     } else if (playerSelection === "scissor" && computerSelection === "paper") {
@@ -39,13 +47,30 @@ function playRound (){
     }
     
 }
-    }   
+
 
 
 function game(){
+    var playerStat = 0;
+    var computerStat = 0;
     for (let i = 0; i <= 5 ; i++) {
         let x = playRound();
-        console.log(x);
+      
+
+        if (x === 1) {
+            playerStat++;
+        } else if (x === 2) {
+            computerStat++;
+        }
+
+        console.log(`Player: ${playerStat}  Computer: ${computerStat}`);
+    }
+    if (playerStat > computerStat) {
+        console.log("Player wins the game!");
+    } else if (computerStat > playerStat) {
+        console.log("Computer wins the game!");
+    } else {
+        console.log("It is a draw (or a bug)!")
     }
 }
 

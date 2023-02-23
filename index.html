@@ -4,12 +4,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
     <script type="text/javascript" src="script.js" defer></script>
-    <title>Rock Paper Scissor</title>
+    <title>Rock Paper Scissors</title>
 </head>
 <body>
- 
- 
+ <div class="nav-bar">
+    <p><button id="rock" class="btn" style="background-image: url(rock.png);"></button></p>
+    <p><button id="paper" class="btn" style="background-image: url(paper.png);"></button></p>
+    <p><button id="scissors" class="btn" style="background-image: url(scissors.png);"></button></p>
+ </div>
+ <div class="nav-bar">
+    <p id="game" class="gametext"></p>
+ </div>
+ <div class="nav-bar">
+    <p id="playerpoints">Player points: 0</p>
+    <p id="computerpoints">Computer points: 0</p>
+    <p id="round">Round: 0/5</p>
+    <p></p>
+ </div>
+
+ <p id="logbook"></p>
 </body>
 
 </html>

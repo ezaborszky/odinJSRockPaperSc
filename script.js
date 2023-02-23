@@ -4,74 +4,83 @@ function getComputerChoice (){
     let x =  Math.floor(Math.random()*3);
 
     if (x === 0) {
-        return ("Rock");
+        return ("rock");
     } else if (x === 1) {
-        return ("Paper");
+        return ("paper");
     } else {
-        return ("Scissor");
+        return ("scissors");
     }
 }
 
-function playRound (){
-    let computerSelection = getComputerChoice().toLowerCase();
-   
-   
-    function checkInput() {while (true) {let playerSelection = (prompt("Enter your choice!", "")).toLowerCase();
-    if (playerSelection === "rock" || playerSelection === "paper" || playerSelection === "scissor") {
-        return playerSelection;
-        break;
-        
-        } else{
-            alert("Please enter \"Rock\", \"Paper\", or \"Scissor\"");
-        }
-       
-    }}
+let playerSelection;
+let computerSelection; 
 
-    playerSelection = checkInput();
+const gameRound = function (input) {
     
+playerSelection = input;
+computerSelection = getComputerChoice();    
+
         if (playerSelection === computerSelection) {
-        alert(`Computer chose ${computerSelection}, player choose ${playerSelection}, it's a draw!`);
+        
         return 0;
-    } else if (playerSelection === "scissor" && computerSelection === "paper") {
-        alert(`Computer chose ${computerSelection}, player choose ${playerSelection}, the Player wins!`);
+    } else if (playerSelection === "scissors" && computerSelection === "paper") {
+        
         return 1;
     }  else if (playerSelection === "paper" && computerSelection === "rock" ) {
-        alert(`Computer chose ${computerSelection}, player choose ${playerSelection}, the Player wins!`);
+        
         return 1;
-    }  else if (playerSelection === "rock" && computerSelection === "scissor") {
-        alert(`Computer chose ${computerSelection}, player choose ${playerSelection}, the Player wins!`);
+    }  else if (playerSelection === "rock" && computerSelection === "scissors") {
+        
         return 1;
     } else {
-        alert(`Computer chose ${computerSelection}, player choose ${playerSelection}, the Computer wins!`);
+        
         return 2;
     }
+};
+
+let playerPoints = 0;
+let computerPoints = 0;
+let round = 0;
+
+const game = document.getElementById("game");
+const pointerCounterPlayer = document.getElementById("playerpoints");
+const pointerCounterComputer = document.getElementById("computerpoints");
+const counterRound = document.getElementById("round");
+const logBook = document.getElementById("logbook")
+
+const buttons = document.querySelectorAll(".btn");
+buttons.forEach((button) => {button.addEventListener('click', () => {
+    console.log(button.id);
     
-}
-
-
-
-function game(){
-    var playerStat = 0;
-    var computerStat = 0;
-    for (let i = 0; i <= 5 ; i++) {
-        let x = playRound();
-      
-
-        if (x === 1) {
-            playerStat++;
-        } else if (x === 2) {
-            computerStat++;
-        }
-
-        console.log(`Player: ${playerStat}  Computer: ${computerStat}`);
-    }
-    if (playerStat > computerStat) {
-        console.log("Player wins the game!");
-    } else if (computerStat > playerStat) {
-        console.log("Computer wins the game!");
+    if (round < 5) {
+    let returnValue = gameRound(button.id);
+    let winner;
+    round++;
+    if (returnValue === 1) {
+        winner = "Player wins!";
+        playerPoints++;
+    } else if (returnValue === 2) {
+        winner = "Computer wins!";
+        computerPoints++;
     } else {
-        console.log("It is a draw (or a bug)!")
+        winner = "It's a draw!"
     }
-}
 
-game();
+    game.textContent = `Player chose ${playerSelection}, computer chose ${computerSelection}. ${winner}`;
+    pointerCounterPlayer.textContent = `Player points: ${playerPoints}`;
+    pointerCounterComputer.textContent = `Computer points: ${computerPoints}`;
+    const logEntry = document.createElement('p');
+    logEntry.textContent = game.textContent;
+    logBook.prepend(logEntry);
+    counterRound.textContent = `Round: ${round}/5`} else {
+        buttons.forEach(button => button.classList.add("inactive-button"));
+        if (playerPoints > computerPoints){
+            counterRound.textContent = `Game over. Player won the match.`
+        } else if (computerPoints > playerPoints) {
+            counterRound.textContent = `Game over. Computer won the match`
+        } else {
+            computerPoints = `Game over. It is a draw`
+        }
+        
+    }
+})})

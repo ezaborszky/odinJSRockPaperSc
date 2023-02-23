@@ -1,0 +1,40 @@
+.button-container {
+    display: flex;
+    padding: 30;
+    justify-content: center;
+    flex-direction: row;
+    padding: 40px;
+}
+
+.btn {
+    flex: 1;
+    
+    width: 181px;
+    height: 179px;
+    border-radius: 20%;
+}
+
+.nav-bar {
+    display: flex;
+    flex-direction: row;
+    color: aliceblue;
+    background-color: darkcyan;
+    justify-content:center;
+    gap: 30px;
+    align-items: center;
+    padding-right: 100px;
+}
+
+body {
+    background-color: rgb(250, 183, 162);
+}
+
+.gametext {
+    font-size: large;
+    color: brown;
+    font-weight: 700;
+}
+
+.inactive-button {
+    filter: grayscale(100%);
+}
